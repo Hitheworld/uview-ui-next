@@ -1,0 +1,27 @@
+{
+  "name": "we-cropper",
+  "version": "1.4.0",
+  "description": "weapp,cropper,canvas",
+  "main": "src/main.js",
+  "types": "types/we-cropper.d.ts",
+  "directories": {
+    "example": "example"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:we-plugin/we-cropper.git"
+  },
+  "author": "dlhandsome",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/we-plugin/we-cropper/issues"
+  },
+  "homepage": "https://github.com/we-plugin/we-cropper#readme",
+  "dependencies": {
+    "base-64": "^0.1.0"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/we-cropper"
+  }
+}
