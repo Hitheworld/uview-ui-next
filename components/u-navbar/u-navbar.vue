@@ -84,8 +84,8 @@
 </script>
 
 <script setup lang="ts">
-  import { CSSProperties, getCurrentInstance, reactive, toRefs, computed, withDefaults } from 'vue'
-  import { ComponentInternalInstance } from "@vue/runtime-core";
+  import { CSSProperties, getCurrentInstance, reactive, toRefs, computed, withDefaults } from "vue"
+  import type { ComponentInternalInstance } from "vue";
   import { useComposable } from '../../libs/hooks';
 	// 获取系统状态栏的高度
 	let systemInfo = uni.getSystemInfoSync();

@@ -52,8 +52,8 @@
     computed,
     watch,
     withDefaults
-  } from 'vue';
-  import { ComponentInternalInstance } from "@vue/runtime-core";
+  } from "vue";
+  import type { ComponentInternalInstance } from "vue";
   import { useComposable } from '../../libs/hooks';
 
 	const indexList= function(): string[]  {

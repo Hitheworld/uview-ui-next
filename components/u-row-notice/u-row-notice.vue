@@ -80,7 +80,7 @@
     onMounted,
     withDefaults
   } from "vue";
-    import { ComponentInternalInstance } from "@vue/runtime-core";
+  import type { ComponentInternalInstance } from "vue";
 
   interface URowNoticeState {
     textWidth: number; // 滚动的文字宽度

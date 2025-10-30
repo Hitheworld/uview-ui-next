@@ -61,7 +61,7 @@
 
 <script setup lang="ts">
   import { CSSProperties, getCurrentInstance, computed, reactive, toRefs, nextTick } from "vue";
-  import { ComponentInternalInstance } from "@vue/runtime-core";
+  import type { ComponentInternalInstance } from "vue";
   import throttle from "../../libs/function/throttle";
   /**
    * button 按钮

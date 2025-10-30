@@ -28,22 +28,33 @@
 - u-circle-progress 圆形进度条新增css作为进度条（当u-circle-progress组件 is-css为false时，采用canvas, 否则使用css样式作为进度条），以解决canvas在原生小程序中层级过高无法覆盖的问题;
 - u-line-progress 组件，新增“text-padding(值为number)”和“text-align（值有'left' | 'center' | 'right' | null）”,不写“text-align”保持原有样式，“text-align”属性针对进度条的文字显示位置进行优化;
 - u-avatar-cropper 组件更新,头像裁剪;
-- 废除 u-parse组件，并不再支持vue3版本 , 请改用v-html;
-
+- 全局方法 $u 在h5的处理，全局方法使用引入方式;
+- 升级对 ComponentInternalInstance 在vue中的引用, 在新版uniapp中报错的问题;
+- v0.0.16 修复“u-tabs-swiper”的颜色渐变过程问题与scroll不在一行的问题;修复"u-tabs"的命名;
+- v0.0.17 修复“u-form-item”验证只验证当前项问题;
+- v0.0.18 修复“u-loading” 当mode="circle"失效问题;
+- v0.0.19 修复“u-form-item”与"u-input" 当 error-type=["message", "border"] 错误的提示方式问题，修复state问题，优化验证只验证当前项问题;增加 peerDependencies 依赖项。
+- v0.0.20 修复“u-form-item” 监听u-form组件的errorType的变化问题及ts类型问题, form错误提示默认值为 error-type=["message", "toast"]。
 
 ## 安装
 
-1、安装 uview-ui-next 库
+1、新建 .npmrc 文件
+```yaml
+registry = https://registry.npmmirror.com/
+```
+2、安装 uview-ui-next 库
 ```bash
 # yarn 方式安装
 yarn add uview-ui-next
 ```
-2、安装 mitt 依赖
+3、安装 mitt 依赖
 ```bash
 # yarn 方式安装
 yarn add mitt
 ```
 
+## 注意事项
+1. $u.xxx 方法在h5打包时可能会出现 undefined , 引用ui库的方法，请使用 import { xxx } form "@ud/uview-ui" 导入使用
 
 ## 快速上手
 

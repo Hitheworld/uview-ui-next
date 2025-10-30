@@ -45,7 +45,7 @@
 
 <script lang="ts">
   export default {
-    name: 'u-number-keyboard',
+    name: 'u-tabs',
   }
 </script>
 

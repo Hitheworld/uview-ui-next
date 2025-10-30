@@ -144,7 +144,7 @@
     validateState: any; // 是否校验成功
     validateMessage: string; // 校验失败的提示语
     // 有错误时的提示方式，message-提示信息，border-如果input设置了边框，变成呈红色，
-    errorType: string[];
+    errorType: ('message' | 'toast' | 'border' | 'border-bottom' | 'none')[];
     fieldValue: string; // 获取当前子组件input的输入的值
     // 父组件的参数，在computed计算中，无法得知parent发生变化，故将父组件的参数值，放到data中
     parentData: IParentDataProps | any;
@@ -214,6 +214,7 @@
   const { addUnit, $parentUtil, broadcast, parent } = useComposable();
 
   const instance: ComponentInternalInstance | null = getCurrentInstance();
+
   const emitter = instance?.appContext.config.globalProperties.emitter;
 
   const uForm = inject<ComponentInternalInstance | null>('uForm', null);
@@ -298,16 +299,18 @@
 
   const broadcastInputError = () => {
     // 子组件发出事件，第三个参数为true或者false，true代表有错误
-    if (parent.value?.type?.name === 'u-input') {
-      const isErr: boolean = state.validateState === 'error' && showError.value('border');
-      emitter.emit('on-form-item-error', isErr);
+    if (props.prop) {
+      // if (parent.value?.type?.name === 'u-input') {
+      //   const isErr: boolean = state.validateState === 'error' && showError.value('border');
+      //   emitter.emit(`on-form-item-error-${props.prop}`, isErr);
+      // }
+      broadcast(
+              'u-input',
+              `on-form-item-error-${props.prop}`,
+              state.validateState === 'error' &&
+              showError.value('border')
+      );
     }
-    broadcast(
-        'u-input',
-        'on-form-item-error',
-        instance?.exposeProxy?.validateState === 'error' &&
-        instance?.exposeProxy?.showError('border')
-    );
   };
 
   // 判断是否需要required校验
@@ -321,10 +324,12 @@
     // 		return rule.required;
     // 	});
     // }
-    // blur事件
-    emitter.on('on-form-blur', onFieldBlur);
-    // change事件
-    emitter.on('on-form-change', onFieldChange);
+    if (props.prop) {
+      // blur事件
+      emitter.on(`on-form-blur-${props.prop}`, onFieldBlur);
+      // change事件
+      emitter.on(`on-form-change-${props.prop}`, onFieldChange);
+    }
   };
 
   // 从u-form的rules属性中，取出当前u-form-item的校验规则
@@ -402,7 +407,7 @@
   });
 
   // 监听u-form组件的errorType的变化
-  watch(() => uForm?.exposeProxy?.errorType, (newValue: string[], oldValue: string[]) => {
+  watch(() => uForm?.props?.errorType, (newValue: string[], oldValue: string[]) => {
     state.errorType = newValue;
     broadcastInputError();
   });

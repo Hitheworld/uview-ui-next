@@ -3,7 +3,7 @@
 // 这里默认值等于undefined有它的含义，因为最顶层元素(组件)的$parent就是undefined，意味着不传name
 // 值(默认为undefined)，就是查找最顶层的$parent
 import { getCurrentInstance } from "vue";
-import { ComponentInternalInstance } from "@vue/runtime-core";
+import type { ComponentInternalInstance } from "vue";
 
 export default function $parent(name: string | undefined = undefined) {
 	const instance: ComponentInternalInstance | null = getCurrentInstance();

@@ -425,10 +425,8 @@
     // 设置下一个tab的颜色
     if (state.tabsInfo?.length) {
       state.tabsInfo[nextTabIndex].color = state.colorGradientArr[colorIndex];
-      // state.tabsInfo[nextTabIndex].itemColor = state.colorGradientArr[colorIndex];
       // 设置当前tab的颜色
       state.tabsInfo[nowTabIndex].color = state.colorGradientArr[colorLength - 1 - colorIndex];
-      // state.tabsInfo[nowTabIndex].itemColor = state.colorGradientArr[colorLength - 1 - colorIndex];
     }
   };
 
@@ -438,10 +436,8 @@
     state.tabsInfo.map((val: ITabsInfo, index: number) => {
       if (current == index) {
         val.color = props.activeColor;
-        // val.itemColor = props.activeBgColor;
       } else {
         val.color = props.inactiveColor;
-        // val.itemColor = props.inactiveBgColor;
       }
       return val;
     });
@@ -459,7 +455,6 @@
     });
     // 颜色渐变过程数组
     state.colorGradientArr = color.colorGradient(props.inactiveColor, props.activeColor, state.colorStep);
-    state.colorGradientArr = color.colorGradient(props.inactiveBgColor, props.activeBgColor, state.colorStep);
   };
 
   watch(() => props.current, (newValue, oldValue) => {
@@ -544,6 +539,8 @@
 
 	.u-tabs-scroll-box {
 		position: relative;
+    width: 100%;
+    white-space: nowrap;
 	}
 
 	.u-tabs-scorll-flex {

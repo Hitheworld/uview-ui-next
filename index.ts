@@ -63,7 +63,6 @@ import throttle from './libs/function/throttle';
 import config from './libs/config/config';
 // 各个需要fixed的地方的z-index配置文件
 import zIndex from './libs/config/zIndex';
-import { onLoad, onShareAppMessage } from '@dcloudio/uni-app'
 
 const $u = {
 	queryParams: queryParams,
@@ -109,8 +108,12 @@ const $u = {
 };
 
 // $u挂载到uni对象上
-// @ts-ignore
-uni.$u = $u;
+try {
+	// @ts-ignore
+	uni.$u = $u;
+} catch (e) {
+	console.warn(e);
+}
 
 export default {
 	install: (app: any, options: any) => {

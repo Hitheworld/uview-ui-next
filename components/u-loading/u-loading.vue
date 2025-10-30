@@ -102,7 +102,7 @@
 		}
 	}
 
-	@-webkit-keyframes u-circle {
+	@keyframes u-circle {
 		0% {
 			transform: rotate(0);
 		}

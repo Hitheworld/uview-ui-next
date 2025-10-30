@@ -39,7 +39,7 @@
 			:type="props.type == 'password' ? 'text' : props.type"
 			:style="[getStyle]"
 			:value="state.defaultValue"
-			:password="props.type == 'password' && !showPassword"
+			:password="props.type == 'password' && !state.showPassword"
 			:placeholder="props.placeholder"
 			:placeholderStyle="props.placeholderStyle"
 			:disabled="props.disabled || props.type === 'select'"
@@ -139,11 +139,6 @@
    * @property {String Number} height 高度，单位rpx(text类型时为70，textarea时为100)
    * @example <u-input v-model="modelValue" :type="type" :border="border" />
    */
-  type Events = {
-    'on-form-item-error': boolean;
-    'on-form-blur': string;
-    'on-form-change': string;
-  };
   interface UInputState {
     defaultValue: number | string;
     inputHeight: number; // input的高度
@@ -261,6 +256,8 @@
     lastValue: '', // 用于头条小程序，判断@input中，前后的值是否发生了变化，因为头条中文下，按下键没有输入内容，也会触发@input时间
   });
 
+  const prop = instance?.parent?.props?.prop;
+
   // 因为uniapp的input组件的maxlength组件必须要数值，这里转为数值，给用户可以传入字符串数值
   const inputMaxlength = computed(() => {
     return Number(props.maxlength);
@@ -307,11 +304,14 @@
       if(trimUtil(value) == state.lastValue) return ;
       state.lastValue = value;
       // #endif
-      // 将当前的值发送到 u-form-item 进行校验
-      if (instance?.parent?.type?.name === 'u-form-item') {
-        emitter.emit('on-form-change', value);
-      }
-      dispatch('u-form-item', 'on-form-change', value);
+	  if (prop) {
+		// 将当前的值发送到 u-form-item 进行校验
+		// if (instance?.parent?.type?.name === 'u-form-item') {
+		//   emitter.emit(`on-form-change-${prop}`, value);
+		// }
+		dispatch('u-form-item', `on-form-change-${prop}`, value);
+	  }
+
     }, 40)
   };
 
@@ -331,15 +331,15 @@
       state.lastValue = value;
       // #endif
       // 将当前的值发送到 u-form-item 进行校验
-      if (instance?.parent?.type?.name === 'u-form-item') {
-        emitter.emit('on-form-blur', event.detail.value);
-      }
-      dispatch('u-form-item', 'on-form-blur', event.detail.value);
+      // if (instance?.parent?.type?.name === 'u-form-item') {
+      //   emitter.emit(`on-form-blur-${prop}`, event.detail.value);
+      // }
+      dispatch('u-form-item', `on-form-blur-${prop}`, event.detail.value);
     }, 40)
   };
 
-  const onFormItemError = (type: boolean) => {
-    state.validateState = type;
+  const onFormItemError = (status: boolean) => {
+    state.validateState = status;
   };
 
   const onFocus = (event: any) => {
@@ -360,7 +360,10 @@
   };
 
   // 监听u-form-item发出的错误事件，将输入框边框变红色
-  emitter.on('on-form-item-error', (e: any) => onFormItemError(e));
+  if (prop) {
+	 emitter.on(`on-form-item-error-${prop}`, onFormItemError);
+  }
+
 
   watch(() => props.modelValue, (newValue, oldValue) => {
     state.defaultValue = newValue;

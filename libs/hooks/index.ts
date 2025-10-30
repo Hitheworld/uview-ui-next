@@ -1,5 +1,4 @@
-import { ComponentInternalInstance, ComponentPublicInstance, ref } from 'vue';
-import { getCurrentInstance } from 'vue'
+import { ComponentInternalInstance, ComponentPublicInstance, getCurrentInstance, ref } from 'vue';
 import addUnit from "../function/addUnit";
 import trim from "../function/trim";
 import toast from "../function/toast";
@@ -106,8 +105,7 @@ export function useComposable() {
     }
     // 有节点表示当前找到了name一样的实例
     if (parentAndRootEl) {
-      emitter.emit(eventName, [eventName].concat(params));
-      // @ts-ignore
+      emitter.emit(eventName, params);
       // parentAndRootEl.$emit.apply(parentAndRootEl, [eventName].concat(params));
     }
   }
@@ -123,7 +121,7 @@ export function useComposable() {
     // @ts-ignore
     this.$children.map((child)=>{
       if (componentName===child.$options.name) {
-        emitter.emit(eventName, [eventName].concat(params));
+        emitter.emit(eventName, params);
         // child.$emit.apply(child,[eventName].concat(params))
       }else {
         // @ts-ignore

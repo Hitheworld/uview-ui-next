@@ -53,7 +53,7 @@
     // rules: object | function | any[];
     // 有错误时的提示方式，message-提示信息，border-如果input设置了边框，变成呈红色，
     // border-bottom-下边框呈现红色，none-无提示
-    errorType?: ('message' | 'toast' | 'none')[];
+    errorType?: ('message' | 'toast' | 'border' | 'border-bottom' | 'none')[];
     // 是否显示表单域的下划线边框
     borderBottom?: boolean;
     // label的位置，left-左边，top-上边

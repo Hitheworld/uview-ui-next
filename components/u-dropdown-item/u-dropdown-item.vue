@@ -58,8 +58,8 @@
     toRefs,
     watch,
     onMounted, useSlots
-  } from 'vue';
-  import { ComponentInternalInstance } from "@vue/runtime-core";
+  } from "vue";
+  import type { ComponentInternalInstance } from "vue";
   import { UDropdownProps } from '../u-dropdown/u-dropdown.vue';
   import { useComposable } from '../../libs/hooks';
 	/**

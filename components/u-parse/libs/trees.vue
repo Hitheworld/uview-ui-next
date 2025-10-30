@@ -77,7 +77,7 @@
 
 <script lang="ts">
   import { defineComponent, getCurrentInstance, ref, reactive, toRefs, nextTick, onMounted, onBeforeUnmount } from "vue";
-  import { ComponentInternalInstance } from "@vue/runtime-core";
+  import type { ComponentInternalInstance } from "vue";
 	global.Parser = {};
 	import Trees from './trees.vue'
 	const errorImg = require('../libs/config').errorImg;

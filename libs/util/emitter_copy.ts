@@ -1,5 +1,5 @@
 import { defineComponent, getCurrentInstance, computed } from "vue";
-import { ComponentInternalInstance } from "@vue/runtime-core";
+import type { ComponentInternalInstance } from "vue";
 
 export default defineComponent({
   setup(props, context) {
